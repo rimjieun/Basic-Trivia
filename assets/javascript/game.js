@@ -92,17 +92,5 @@ $(document).ready(function() {
 		$("#results").append("<p>Unanswered: " + unanswered + "</p>");
 	}
 
-	
-	
-
-	
-
-
-	
-
-
-
-	
-
 
 }); // document.ready ends
