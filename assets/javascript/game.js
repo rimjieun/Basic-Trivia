@@ -21,19 +21,8 @@ $(document).ready(function() {
 
 		// Creating the quiz
 		// Replace Start button with a new <div> to wrap quiz template
-		$("#gameSection").html("<div id='quiz'></div>");
-	
-		// 
-		for (i = 0; i < questionAnswers.length; i++) {
-			$("#quiz").append("<p class='question' value=" + i + ">" + questionAnswers[i].question + "</p>");
-			$("#quiz").append("<form class='answerChoices' value=" + i + "></form>");
-			var choicesList = questionAnswers[i].choices;
-			for (j = 0; j < choicesList.length; j++) {
-				$("form[value=" + i + "]").append("<input type='radio' name='answerChoice' value=" + choicesList[j] + ">" + choicesList[j] + "</input>");
-			}
-		}
-
-		$("#gameSection").append("<button id='done-button'>Done</button>");
+		createQuiz();
+		
 
 		// Store selected answers in array in order of questions-------------------------------------
 		$("input").on("change", function() {
@@ -49,6 +38,22 @@ $(document).ready(function() {
 		});
 
 	}; // startGame ends
+
+	function createQuiz() {
+		$("#gameSection").html("<div id='quiz'></div>");
+	
+		// 
+		for (i = 0; i < questionAnswers.length; i++) {
+			$("#quiz").append("<p class='question' value=" + i + ">" + questionAnswers[i].question + "</p>");
+			$("#quiz").append("<form class='answerChoices' value=" + i + "></form>");
+			var choicesList = questionAnswers[i].choices;
+			for (j = 0; j < choicesList.length; j++) {
+				$("form[value=" + i + "]").append("<input type='radio' name='answerChoice' value=" + choicesList[j] + ">" + choicesList[j] + "</input>");
+			}
+		}
+
+		$("#gameSection").append("<button id='done-button'>Done</button>");
+	}
 
 	
 	function checkAnswers() {
