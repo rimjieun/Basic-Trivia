@@ -4,7 +4,7 @@ $(document).ready(function() {
 	var incorrect = 0;
 	var unanswered = 0;
 	var selectedAnswers = [];
-	var timer;
+	// var timer;
 	var count = 30;
 
 	var questionAnswers = [
@@ -17,7 +17,7 @@ $(document).ready(function() {
 		];
 
 	$("#start-button").on("click", function() {
-		timer = setInterval(countDown, 1000);
+		setInterval(countDown, 1000); // still works without assigning to timer
 		startGame();
 	});
 
