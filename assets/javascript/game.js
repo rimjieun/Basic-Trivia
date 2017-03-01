@@ -15,12 +15,6 @@ $(document).ready(function() {
 			{question: "Q6", choices: ["A", "B", "C", "D"], answer: "D"}
 		];
 
-// THINGS I NEED:
-				// page with questions & answer choices
-				// DONE button
-				// finish page
-				// var for correct, incorrect, unanswered
-
 	// startGame()
 	// No need to restart; will need to reload to play again
 	function startGame() {
@@ -46,20 +40,17 @@ $(document).ready(function() {
 			var index = $(this).parent().attr("value");
 			selectedAnswers[index] = $(this).val();
 			console.log(selectedAnswers);
-		})
+		});
 		//-------------------------------------------------------------------------------------------
 
 		$("#done-button").on("click", function() {
 			checkAnswers(); // why can't I call this outside of startGame()?
-			console.log(correct);
-			console.log(incorrect);
-			console.log(unanswered);
-		})
+			showResults();
+		});
 
 	}; // startGame ends
 
 	
-
 	function checkAnswers() {
 		for (i = 0; i < questionAnswers.length; i++) {
 			if (selectedAnswers[i] !== undefined) {
@@ -74,17 +65,25 @@ $(document).ready(function() {
 				unanswered++;
 			}
 		}
-	} //
+	}
+
+	function showResults() {
+		$("#gameSection").html("<div id='results'></div>");
+		$("#results").append("<h2>All Done!</h2>");
+		$("#results").append("<p>Correct: " + correct + "</p>");
+		$("#results").append("<p>Incorrect: " + incorrect + "</p>");
+		$("#results").append("<p>Unanswered: " + unanswered + "</p>");
+	}
 
 	
 
 	$("#start-button").on("click", function() {
 		startGame();
-	})
+	});
 
 
 
 	
 
 
-}) // document.ready ends
+}); // document.ready ends
