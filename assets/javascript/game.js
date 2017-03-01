@@ -4,7 +4,8 @@ $(document).ready(function() {
 	var incorrect = 0;
 	var unanswered = 0;
 	var selectedAnswers = [];
-	var correctAnswers = [];
+	var timer;
+	var count = 30;
 
 	var questionAnswers = [
 			{question: "Q1", choices: ["A", "B", "C", "D"], answer: "C"},
@@ -15,14 +16,25 @@ $(document).ready(function() {
 			{question: "Q6", choices: ["A", "B", "C", "D"], answer: "D"}
 		];
 
+	$("#start-button").on("click", function() {
+		timer = setInterval(countDown, 1000);
+		startGame();
+	});
+
+	function countDown() {
+		count--;
+		$("#timer").html(count);
+		if (count === 0) {
+			checkAnswers();
+			showResults();
+		}
+	}
+
 	// startGame()
 	// No need to restart; will need to reload to play again
 	function startGame() {
 
-		// Creating the quiz
-		// Replace Start button with a new <div> to wrap quiz template
 		createQuiz();
-		
 
 		// Store selected answers in array in order of questions-------------------------------------
 		$("input").on("change", function() {
@@ -36,13 +48,14 @@ $(document).ready(function() {
 			checkAnswers(); // why can't I call this outside of startGame()?
 			showResults();
 		});
-
 	}; // startGame ends
 
 	function createQuiz() {
-		$("#gameSection").html("<div id='quiz'></div>");
+
+		$("#gameSection").html("<div id='timer'>" + count + "</div>");
+
+		$("#gameSection").append("<div id='quiz'></div>");
 	
-		// 
 		for (i = 0; i < questionAnswers.length; i++) {
 			$("#quiz").append("<p class='question' value=" + i + ">" + questionAnswers[i].question + "</p>");
 			$("#quiz").append("<form class='answerChoices' value=" + i + "></form>");
@@ -51,7 +64,6 @@ $(document).ready(function() {
 				$("form[value=" + i + "]").append("<input type='radio' name='answerChoice' value=" + choicesList[j] + ">" + choicesList[j] + "</input>");
 			}
 		}
-
 		$("#gameSection").append("<button id='done-button'>Done</button>");
 	}
 
@@ -81,10 +93,12 @@ $(document).ready(function() {
 	}
 
 	
+	
 
-	$("#start-button").on("click", function() {
-		startGame();
-	});
+	
+
+
+	
 
 
 
